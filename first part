@@ -1,0 +1,82 @@
+#include <iostream>
+
+class Float_digit
+//с большой буквы
+{
+public:
+    //конструктор по умолчанию создаётся без обьявления
+
+    float value = 0;
+    //дробное число
+
+    float operator+(float number)
+    {
+        return this->value + number;
+        //this-> для читабельности
+    }
+    float operator+(Float_digit &oop_object)
+    //& для оптимизации
+    {
+        return this->value + oop_object.value;
+    }
+    //возможность складывать ооп_обьект+число
+    //возможность складывать ооп_обьект+ооп_обьект
+
+    float operator-(float number)
+    {
+        return this->value - number;
+    }
+    float operator-(Float_digit &oop_object)
+    {
+        return this->value - oop_object.value;
+    }
+    //возможность вычитать ооп_обьект-число
+    //возможность вычитать ооп_обьект-ооп_обьект
+
+    float operator*(float number)
+    {
+        return this->value * number;
+    }
+    float operator*(Float_digit &oop_object)
+    {
+        return this->value * oop_object.value;
+    }
+    //возможность умножать ооп_обьект*число
+    //возможность умножать ооп_обьект*ооп_обьект
+
+    float operator/(float number)
+    {
+        return this->value / number;
+    }
+    float operator/(Float_digit &oop_object)
+    {
+        return this->value / oop_object.value;
+    }
+    //возможность делить ооп_обьект/число
+    //возможность делить ооп_обьект/ооп_обьект
+};
+
+int main()
+{
+    Float_digit float_number_1;
+    float_number_1.value = 2;
+    Float_digit float_number_2;
+    float_number_2.value = 6;
+    //value в public для возможности изменения значения таким способом
+
+    std::cout << float_number_1 + 4.5 << '\n';
+    std::cout << float_number_1 + float_number_2 << '\n';
+    //тест двух перегрузок оператора +
+
+    std::cout << float_number_1 - 4.5 << '\n';
+    std::cout << float_number_1 - float_number_2 << '\n';
+    //тест двух перегрузок оператора -
+
+    std::cout << float_number_1 * 4.5 << '\n';
+    std::cout << float_number_1 * float_number_2 << '\n';
+    //тест двух перегрузок оператора *
+
+    std::cout << float_number_1 / 4.5 << '\n';
+    std::cout << float_number_1 / float_number_2 << '\n';
+    //тест двух перегрузок оператора /
+}

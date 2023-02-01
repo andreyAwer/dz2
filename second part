@@ -1,0 +1,132 @@
+#include <iostream>
+
+class Complex
+//название класса с большой буквы
+{
+public:
+    double long value[2] = {0.0, 0.0};
+    //значение комплексного числа это
+    //координата точки в 2D
+
+    Complex(double long x, double long y)
+    //перегрузка конструктора для
+    //явного присваивания значения
+    {
+        std::cout << "Complex(double long x, double long y)\n";
+        //графическая демонстрация запуска перегрузки конструктора
+        this->value[0] = x;
+        this->value[1] = y;
+        //наглядное показание месторасположения массива через this->
+    }
+
+    Complex() { std::cout << "Complex()\n"; }
+    //если была создана перегрузка конструктора,
+    //конструктор по умолчанию не обьявляется неявно
+    //конструктор по умолчанию графически показывает свою работу
+
+    double long *operator+(double long coords[2])
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] + coords[0];
+        return_x_y[1] = this->value[1] + coords[1];
+        return return_x_y;
+    }
+    //перегрузка оператора + массив координат
+    double long *operator+(Complex &complex_obj_2)
+    //& для оптимизации
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] + complex_obj_2.value[0];
+        return_x_y[1] = this->value[1] + complex_obj_2.value[1];
+        return return_x_y;
+    }
+    //перегрузка оператора + обьект класса
+
+    double long *operator-(double long coords[2])
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] - coords[0];
+        return_x_y[1] = this->value[1] - coords[1];
+        return return_x_y;
+    }
+    //перегрузка оператора - массив координат
+    double long *operator-(Complex &complex_obj_2)
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] - complex_obj_2.value[0];
+        return_x_y[1] = this->value[1] - complex_obj_2.value[1];
+        return return_x_y;
+    }
+    //перегрузка оператора - обьект класса
+
+    double long *operator*(double long coords[2])
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] * coords[0];
+        return_x_y[1] = this->value[1] * coords[1];
+        return return_x_y;
+    }
+    //перегрузка оператора * массив координат
+    double long *operator*(Complex &complex_obj_2)
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] * complex_obj_2.value[0];
+        return_x_y[1] = this->value[1] * complex_obj_2.value[1];
+        return return_x_y;
+    }
+    //перегрузка оператора * обьект класса
+
+    double long *operator/(double long coords[2])
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] / coords[0];
+        return_x_y[1] = this->value[1] / coords[1];
+        return return_x_y;
+    }
+    //перегрузка оператора / массив координат
+    double long *operator/(Complex &complex_obj_2)
+    {
+        static double long return_x_y[2];
+        return_x_y[0] = this->value[0] / complex_obj_2.value[0];
+        return_x_y[1] = this->value[1] / complex_obj_2.value[1];
+        return return_x_y;
+    }
+    //перегрузка оператора / обьект класса
+};
+
+int main()
+{
+    Complex point_cord = {2.0, 2.0};
+    Complex point_cord_2;
+    //работа перегруженного и по умолчанию конструктора
+
+    double long x_y[2] = {1.0, 4.0};
+
+    std::cout << *(point_cord + x_y) << ' ';
+    std::cout << *((point_cord + x_y) + 1) << '\n';
+
+    point_cord_2.value[0] = 1;
+    point_cord_2.value[1] = 2;
+
+    std::cout << *(point_cord + point_cord_2) << ' ';
+    std::cout << *((point_cord + point_cord_2) + 1) << '\n';
+
+    std::cout << *(point_cord - x_y) << ' ';
+    std::cout << *((point_cord - x_y) + 1) << '\n';
+
+    std::cout << *(point_cord - point_cord_2) << ' ';
+    std::cout << *((point_cord - point_cord_2) + 1) << '\n';
+
+    std::cout << *(point_cord * x_y) << ' ';
+    std::cout << *((point_cord * x_y) + 1) << '\n';
+
+    std::cout << *(point_cord * point_cord_2) << ' ';
+    std::cout << *((point_cord * point_cord_2) + 1) << '\n';
+
+    std::cout << *(point_cord / x_y) << ' ';
+    std::cout << *((point_cord / x_y) + 1) << '\n';
+
+    std::cout << *(point_cord / point_cord_2) << ' ';
+    std::cout << *((point_cord / point_cord_2) + 1) << '\n';
+    //все перегрузки всех операторов 
+}
